@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>A Small Project</title>
+
+<style>
+  body {
+    background-color: #0d0d0d;
+    color: #00ff9c;
+    font-family: "Courier New", monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  #terminal {
+    width: 90%;
+    max-width: 800px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    background-color: #00ff9c;
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+
+  button {
+    background-color: transparent;
+    color: #00ff9c;
+    border: 2px solid #00ff9c;
+    padding: 10px 18px;
+    font-family: inherit;
+    font-size: 1rem;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #00ff9c;
+    color: #0d0d0d;
+  }
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+const lines = [
+  "> Initializing project...",
+  "> Loading dependencies...",
+  "> Compiling emotions...",
+  "",
+  "> Hello Mitali.",
+  "",
+  "> This wasn’t just a project.",
+  "> This was me trying to say something.",
+  "",
+  "> Every day with you feels special.",
+  "> Every moment feels like home.",
+  "",
+  "> So here’s the most important line I’ve ever written:",
+  "",
+  "💖 Mitali Narayan, will you be my Valentine? 💖",
+];
+
+let i = 0;
+const terminal = document.getElementById("terminal");
+
+function typeLine() {
+  if (i < lines.length) {
+    terminal.innerHTML += lines[i] + "<br/>";
+    i++;
+    setTimeout(typeLine, 900);
+  } else {
+    showButtons();
+  }
+}
+
+function showButtons() {
+  terminal.innerHTML += `
+    <div class="buttons">
+      <button onclick="yesClicked()">YES 💘</button>
+      <button onclick="yesClicked()">I was hoping you'd ask 🥰</button>
+    </div>
+    <span class="cursor"></span>
+  `;
+}
+
+function yesClicked() {
+  confetti({
+    particleCount: 200,
+    spread: 100,
+    origin: { y: 0.6 }
+  });
+
+  terminal.innerHTML = `
+    💖💖💖<br><br>
+    > Response received successfully.<br>
+    > Happiness level: MAXIMUM.<br><br>
+    Thank you for making this the best Valentine ever, Mitali. 💕<br><br>
+    — Aakash
+  `;
+}
+
+typeLine();
+</script>
+
+</body>
+</html>
